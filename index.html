@@ -386,6 +386,74 @@
 
 </section>
 
+
+  <!-- Lisäominaisuus: Bootstrap Modal -->
+<section id="tietoa" class="container my-5 text-center">
+
+  <h2 class="mb-3">Tietoa sivustosta</h2>
+
+  <p>
+    Tämä sivusto esittelee erilaisia kahvijuomia Bootstrap-komponenttien avulla.
+  </p>
+
+  <!-- Modal-nappi -->
+  <button
+    type="button"
+    class="btn btn-dark"
+    data-bs-toggle="modal"
+    data-bs-target="#tietoaModal">
+
+    Lue lisää sivustosta
+  </button>
+
+</section>
+
+
+<!-- Modal-ikkuna -->
+<div
+  class="modal fade"
+  id="tietoaModal"
+  tabindex="-1"
+  aria-labelledby="tietoaModalLabel"
+  aria-hidden="true">
+
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h2 class="modal-title fs-5" id="tietoaModalLabel">
+          Tietoa kahvisivustosta
+        </h2>
+
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Sulje">
+        </button>
+      </div>
+
+      <div class="modal-body">
+        Sivusto on tehty Bootstrapilla. Sivustolla käytetään muun muassa
+        navigaatiota, kuvakarusellia, ruudukkoa, kortteja, taulukkoa ja haitaria.
+        Modal-ikkuna toimii sivuston ylimääräisenä Bootstrap-ominaisuutena.
+      </div>
+
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal">
+
+          Sulje
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+  
   <!-- Bootstrap JavaScript -->
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
