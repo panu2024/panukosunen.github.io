@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+
   <title>Kahvisivusto</title>
 
   <!-- Bootstrap CSS -->
@@ -14,14 +14,14 @@
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
     crossorigin="anonymous">
 
-    <!-- Sivuston oma CSS -->
-    <link rel="stylesheet" href="style.css">
+  <!-- Sivuston oma CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
   <!-- Navigaatio -->
-  <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
     <div class="container">
 
       <a class="navbar-brand" href="#">Kahvisivusto</a>
@@ -44,7 +44,12 @@
         <ul class="navbar-nav ms-auto">
 
           <li class="nav-item">
-            <a class="nav-link active" href="#">Etusivu</a>
+            <a
+              class="nav-link active"
+              href="#"
+              aria-current="page">
+              Etusivu
+            </a>
           </li>
 
           <li class="nav-item">
@@ -66,397 +71,464 @@
   </nav>
 
 
-  <!-- Kuvakaruselli -->
-  <div id="kahviKaruselli" class="carousel slide" data-bs-ride="carousel">
+  <!-- Sivuston pääsisältö -->
+  <main>
 
-    <!-- Kuvien alapuolella olevat pisteet -->
-    <div class="carousel-indicators">
+    <!-- Sivuston pääotsikko ruudunlukijoita varten -->
+    <h1 class="visually-hidden">Kahvisivusto</h1>
 
-      <button
-        type="button"
-        data-bs-target="#kahviKaruselli"
-        data-bs-slide-to="0"
-        class="active"
-        aria-current="true"
-        aria-label="Kuva 1">
-      </button>
 
-      <button
-        type="button"
-        data-bs-target="#kahviKaruselli"
-        data-bs-slide-to="1"
-        aria-label="Kuva 2">
-      </button>
+    <!-- Kuvakaruselli -->
+    <div
+      id="kahviKaruselli"
+      class="carousel slide"
+      data-bs-ride="carousel">
 
-      <button
-        type="button"
-        data-bs-target="#kahviKaruselli"
-        data-bs-slide-to="2"
-        aria-label="Kuva 3">
-      </button>
+      <!-- Kuvien alapuolella olevat pisteet -->
+      <div class="carousel-indicators">
 
-    </div>
+        <button
+          type="button"
+          data-bs-target="#kahviKaruselli"
+          data-bs-slide-to="0"
+          class="active"
+          aria-current="true"
+          aria-label="Kuva 1">
+        </button>
 
-    <!-- Karusellin kuvat -->
-    <div class="carousel-inner">
+        <button
+          type="button"
+          data-bs-target="#kahviKaruselli"
+          data-bs-slide-to="1"
+          aria-label="Kuva 2">
+        </button>
 
-      <div class="carousel-item active">
-        <img
-          src="https://images.unsplash.com/photo-1510707577719-ae7c14805e3a"
-          class="d-block w-100"
-          style="height: 500px; object-fit: cover;"
-          alt="Espresso kahvikupissa">
+        <button
+          type="button"
+          data-bs-target="#kahviKaruselli"
+          data-bs-slide-to="2"
+          aria-label="Kuva 3">
+        </button>
 
-        <div class="carousel-caption d-none d-md-block">
-          <h2>Espresso</h2>
-          <p>Pieni mutta voimakas kahvijuoma.</p>
-        </div>
       </div>
 
-      <div class="carousel-item">
-        <img
-          src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085"
-          class="d-block w-100"
-          style="height: 500px; object-fit: cover;"
-          alt="Kahvia ja kahvipapuja">
+      <!-- Karusellin kuvat -->
+      <div class="carousel-inner">
 
-        <div class="carousel-caption d-none d-md-block">
-          <h2>Kahvipavut</h2>
-          <p>Hyvä kahvi alkaa laadukkaista pavuista.</p>
-        </div>
-      </div>
-
-      <div class="carousel-item">
-        <img
-          src="https://images.unsplash.com/photo-1509042239860-f550ce710b93"
-          class="d-block w-100"
-          style="height: 500px; object-fit: cover;"
-          alt="Kahvikuppi pöydällä">
-
-        <div class="carousel-caption d-none d-md-block">
-          <h2>Kahvihetki</h2>
-          <p>Kahvista voi nauttia monella eri tavalla.</p>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Edellinen kuva -->
-    <button
-      class="carousel-control-prev"
-      type="button"
-      data-bs-target="#kahviKaruselli"
-      data-bs-slide="prev">
-
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Edellinen</span>
-    </button>
-
-    <!-- Seuraava kuva -->
-    <button
-      class="carousel-control-next"
-      type="button"
-      data-bs-target="#kahviKaruselli"
-      data-bs-slide="next">
-
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Seuraava</span>
-    </button>
-
-  </div>
-
-
-  <!-- Kahvikortit ja Bootstrap-ruudukko -->
-  <section id="kahvit" class="container my-5">
-
-    <h2 class="text-center mb-4">Kahvijuomia</h2>
-
-    <div class="row g-4">
-
-      <!-- Espresso -->
-      <div class="col-md-4">
-        <div class="card h-100">
+        <!-- Kuva 1 -->
+        <div class="carousel-item active">
 
           <img
             src="https://images.unsplash.com/photo-1510707577719-ae7c14805e3a"
-            class="card-img-top"
-            style="height: 250px; object-fit: cover;"
+            class="d-block w-100"
+            style="height: 500px; object-fit: cover;"
             alt="Espresso kahvikupissa">
 
-          <div class="card-body">
-            <h3 class="card-title">Espresso</h3>
-
-            <p class="card-text">
-              Espresso on pieni ja voimakas kahvijuoma, joka valmistetaan
-              paineella hienoksi jauhetusta kahvista.
-            </p>
+          <div class="carousel-caption d-none d-md-block">
+            <h2>Espresso</h2>
+            <p>Pieni mutta voimakas kahvijuoma.</p>
           </div>
 
         </div>
-      </div>
 
-
-      <!-- Cappuccino -->
-      <div class="col-md-4">
-        <div class="card h-100">
-
-          <img
-            src="https://images.unsplash.com/photo-1534778101976-62847782c213"
-            class="card-img-top"
-            style="height: 250px; object-fit: cover;"
-            alt="Cappuccino kahvikupissa">
-
-          <div class="card-body">
-            <h3 class="card-title">Cappuccino</h3>
-
-            <p class="card-text">
-              Cappuccino valmistetaan espressosta ja vaahdotetusta maidosta.
-              Se on pehmeä ja täyteläinen kahvijuoma.
-            </p>
-          </div>
-
-        </div>
-      </div>
-
-
-      <!-- Suodatinkahvi -->
-      <div class="col-md-4">
-        <div class="card h-100">
+        <!-- Kuva 2 -->
+        <div class="carousel-item">
 
           <img
             src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085"
-            class="card-img-top"
-            style="height: 250px; object-fit: cover;"
-            alt="Suodatinkahvia ja kahvipapuja">
+            class="d-block w-100"
+            style="height: 500px; object-fit: cover;"
+            alt="Kahvia ja kahvipapuja">
 
-          <div class="card-body">
-            <h3 class="card-title">Suodatinkahvi</h3>
+          <div class="carousel-caption d-none d-md-block">
+            <h2>Kahvipavut</h2>
+            <p>Hyvä kahvi alkaa laadukkaista pavuista.</p>
+          </div>
 
-            <p class="card-text">
-              Suodatinkahvi on Suomessa suosittu tapa valmistaa kahvia.
-              Sen maku on yleensä espressokahvia kevyempi.
-            </p>
+        </div>
+
+        <!-- Kuva 3 -->
+        <div class="carousel-item">
+
+          <img
+            src="https://images.unsplash.com/photo-1509042239860-f550ce710b93"
+            class="d-block w-100"
+            style="height: 500px; object-fit: cover;"
+            alt="Kahvikuppi pöydällä">
+
+          <div class="carousel-caption d-none d-md-block">
+            <h2>Kahvihetki</h2>
+            <p>Kahvista voi nauttia monella eri tavalla.</p>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Edellinen kuva -->
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#kahviKaruselli"
+        data-bs-slide="prev">
+
+        <span
+          class="carousel-control-prev-icon"
+          aria-hidden="true">
+        </span>
+
+        <span class="visually-hidden">Edellinen</span>
+      </button>
+
+      <!-- Seuraava kuva -->
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#kahviKaruselli"
+        data-bs-slide="next">
+
+        <span
+          class="carousel-control-next-icon"
+          aria-hidden="true">
+        </span>
+
+        <span class="visually-hidden">Seuraava</span>
+      </button>
+
+    </div>
+
+
+    <!-- Kahvikortit ja Bootstrap-ruudukko -->
+    <section id="kahvit" class="container my-5">
+
+      <h2 class="text-center mb-4">Kahvijuomia</h2>
+
+      <div class="row g-4">
+
+        <!-- Espresso-kortti -->
+        <div class="col-md-4">
+          <div class="card h-100">
+
+            <img
+              src="https://images.unsplash.com/photo-1510707577719-ae7c14805e3a"
+              class="card-img-top"
+              style="height: 250px; object-fit: cover;"
+              alt="Espresso kahvikupissa">
+
+            <div class="card-body">
+
+              <h3 class="card-title">Espresso</h3>
+
+              <p class="card-text">
+                Espresso on pieni ja voimakas kahvijuoma, joka valmistetaan
+                paineella hienoksi jauhetusta kahvista.
+              </p>
+
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- Cappuccino-kortti -->
+        <div class="col-md-4">
+          <div class="card h-100">
+
+            <img
+              src="https://images.unsplash.com/photo-1534778101976-62847782c213"
+              class="card-img-top"
+              style="height: 250px; object-fit: cover;"
+              alt="Cappuccino kahvikupissa">
+
+            <div class="card-body">
+
+              <h3 class="card-title">Cappuccino</h3>
+
+              <p class="card-text">
+                Cappuccino valmistetaan espressosta ja vaahdotetusta maidosta.
+                Se on pehmeä ja täyteläinen kahvijuoma.
+              </p>
+
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- Suodatinkahvi-kortti -->
+        <div class="col-md-4">
+          <div class="card h-100">
+
+            <img
+              src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085"
+              class="card-img-top"
+              style="height: 250px; object-fit: cover;"
+              alt="Suodatinkahvia ja kahvipapuja">
+
+            <div class="card-body">
+
+              <h3 class="card-title">Suodatinkahvi</h3>
+
+              <p class="card-text">
+                Suodatinkahvi on Suomessa suosittu tapa valmistaa kahvia.
+                Sen maku on yleensä espressokahvia kevyempi.
+              </p>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- Kahvijuomien taulukko -->
+    <section class="container my-5">
+
+      <h2 class="text-center mb-4">Kahvijuomien vertailu</h2>
+
+      <div class="table-responsive">
+
+        <table class="table table-striped table-hover">
+
+          <!-- Taulukon kuvaus ruudunlukijoille -->
+          <caption class="visually-hidden">
+            Kahvijuomien ominaisuuksien vertailu
+          </caption>
+
+          <thead class="table-dark">
+
+            <tr>
+              <th scope="col">Kahvijuoma</th>
+              <th scope="col">Espresso</th>
+              <th scope="col">Maito</th>
+              <th scope="col">Koko</th>
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+            <tr>
+              <td>Espresso</td>
+              <td>1 annos</td>
+              <td>Ei</td>
+              <td>Noin 30 ml</td>
+            </tr>
+
+            <tr>
+              <td>Cappuccino</td>
+              <td>1 annos</td>
+              <td>Kyllä</td>
+              <td>Noin 150–180 ml</td>
+            </tr>
+
+            <tr>
+              <td>Suodatinkahvi</td>
+              <td>Ei</td>
+              <td>Valinnainen</td>
+              <td>Noin 200–300 ml</td>
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+    </section>
+
+
+    <!-- UKK-haitari -->
+    <section id="ukk" class="container my-5">
+
+      <h2 class="text-center mb-4">Usein kysytyt kysymykset</h2>
+
+      <div class="accordion" id="kahviAccordion">
+
+        <!-- Kysymys 1 -->
+        <div class="accordion-item">
+
+          <h3 class="accordion-header">
+
+            <button
+              class="accordion-button"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#kysymys1"
+              aria-expanded="true"
+              aria-controls="kysymys1">
+
+              Mitä espresso on?
+
+            </button>
+
+          </h3>
+
+          <div
+            id="kysymys1"
+            class="accordion-collapse collapse show"
+            data-bs-parent="#kahviAccordion">
+
+            <div class="accordion-body">
+              Espresso on pieni ja voimakas kahvijuoma, joka valmistetaan
+              paineella hienoksi jauhetusta kahvista.
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- Kysymys 2 -->
+        <div class="accordion-item">
+
+          <h3 class="accordion-header">
+
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#kysymys2"
+              aria-expanded="false"
+              aria-controls="kysymys2">
+
+              Mitä eroa on espressolla ja suodatinkahvilla?
+
+            </button>
+
+          </h3>
+
+          <div
+            id="kysymys2"
+            class="accordion-collapse collapse"
+            data-bs-parent="#kahviAccordion">
+
+            <div class="accordion-body">
+              Espresso valmistetaan paineella ja se on tiivistetympi juoma.
+              Suodatinkahvissa kuuma vesi kulkee kahvin läpi suodattimen avulla.
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- Kysymys 3 -->
+        <div class="accordion-item">
+
+          <h3 class="accordion-header">
+
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#kysymys3"
+              aria-expanded="false"
+              aria-controls="kysymys3">
+
+              Miten cappuccino valmistetaan?
+
+            </button>
+
+          </h3>
+
+          <div
+            id="kysymys3"
+            class="accordion-collapse collapse"
+            data-bs-parent="#kahviAccordion">
+
+            <div class="accordion-body">
+              Cappuccino valmistetaan espressosta ja vaahdotetusta maidosta.
+              Tyypillisesti juomassa on espressoa, lämmintä maitoa ja maitovaahtoa.
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- Lisäominaisuus: Bootstrap Modal -->
+    <section id="tietoa" class="container my-5 text-center">
+
+      <h2 class="mb-3">Tietoa sivustosta</h2>
+
+      <p>
+        Tämä sivusto esittelee erilaisia kahvijuomia Bootstrap-komponenttien avulla.
+      </p>
+
+      <!-- Modal-ikkunan avaava nappi -->
+      <button
+        type="button"
+        class="btn btn-coffee"
+        data-bs-toggle="modal"
+        data-bs-target="#tietoaModal">
+
+        Lue lisää sivustosta
+
+      </button>
+
+    </section>
+
+
+    <!-- Modal-ikkuna -->
+    <div
+      class="modal fade"
+      id="tietoaModal"
+      tabindex="-1"
+      aria-labelledby="tietoaModalLabel"
+      aria-hidden="true">
+
+      <div class="modal-dialog">
+
+        <div class="modal-content">
+
+          <div class="modal-header">
+
+            <h2
+              class="modal-title fs-5"
+              id="tietoaModalLabel">
+
+              Tietoa kahvisivustosta
+
+            </h2>
+
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Sulje">
+            </button>
+
+          </div>
+
+          <div class="modal-body">
+            Sivusto on tehty Bootstrapilla. Sivustolla käytetään muun muassa
+            navigaatiota, kuvakarusellia, ruudukkoa, kortteja, taulukkoa ja
+            haitaria. Modal-ikkuna toimii sivuston ylimääräisenä
+            Bootstrap-ominaisuutena.
+          </div>
+
+          <div class="modal-footer">
+
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal">
+
+              Sulje
+
+            </button>
+
           </div>
 
         </div>
       </div>
-
-    </div>
-  </section>
-
-  <!-- Kahvijuomien taulukko -->
-<section class="container my-5">
-
-  <h2 class="text-center mb-4">Kahvijuomien vertailu</h2>
-
-  <div class="table-responsive">
-    <table class="table table-striped table-hover">
-
-      <thead class="table-dark">
-        <tr>
-          <th scope="col">Kahvijuoma</th>
-          <th scope="col">Espresso</th>
-          <th scope="col">Maito</th>
-          <th scope="col">Koko</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr>
-          <td>Espresso</td>
-          <td>1 annos</td>
-          <td>Ei</td>
-          <td>Noin 30 ml</td>
-        </tr>
-
-        <tr>
-          <td>Cappuccino</td>
-          <td>1 annos</td>
-          <td>Kyllä</td>
-          <td>Noin 150–180 ml</td>
-        </tr>
-
-        <tr>
-          <td>Suodatinkahvi</td>
-          <td>Ei</td>
-          <td>Valinnainen</td>
-          <td>Noin 200–300 ml</td>
-        </tr>
-      </tbody>
-
-    </table>
-  </div>
-
-</section>
-
-  <!-- UKK-haitari -->
-<section id="ukk" class="container my-5">
-
-  <h2 class="text-center mb-4">Usein kysytyt kysymykset</h2>
-
-  <div class="accordion" id="kahviAccordion">
-
-    <!-- Kysymys 1 -->
-    <div class="accordion-item">
-
-      <h3 class="accordion-header">
-        <button
-          class="accordion-button"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#kysymys1"
-          aria-expanded="true"
-          aria-controls="kysymys1">
-
-          Mitä espresso on?
-        </button>
-      </h3>
-
-      <div
-        id="kysymys1"
-        class="accordion-collapse collapse show"
-        data-bs-parent="#kahviAccordion">
-
-        <div class="accordion-body">
-          Espresso on pieni ja voimakas kahvijuoma, joka valmistetaan
-          paineella hienoksi jauhetusta kahvista.
-        </div>
-
-      </div>
     </div>
 
-
-    <!-- Kysymys 2 -->
-    <div class="accordion-item">
-
-      <h3 class="accordion-header">
-        <button
-          class="accordion-button collapsed"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#kysymys2"
-          aria-expanded="false"
-          aria-controls="kysymys2">
-
-          Mitä eroa on espressolla ja suodatinkahvilla?
-        </button>
-      </h3>
-
-      <div
-        id="kysymys2"
-        class="accordion-collapse collapse"
-        data-bs-parent="#kahviAccordion">
-
-        <div class="accordion-body">
-          Espresso valmistetaan paineella ja se on tiivistetympi juoma.
-          Suodatinkahvissa kuuma vesi kulkee kahvin läpi suodattimen avulla.
-        </div>
-
-      </div>
-    </div>
+  </main>
 
 
-    <!-- Kysymys 3 -->
-    <div class="accordion-item">
-
-      <h3 class="accordion-header">
-        <button
-          class="accordion-button collapsed"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#kysymys3"
-          aria-expanded="false"
-          aria-controls="kysymys3">
-
-          Miten cappuccino valmistetaan?
-        </button>
-      </h3>
-
-      <div
-        id="kysymys3"
-        class="accordion-collapse collapse"
-        data-bs-parent="#kahviAccordion">
-
-        <div class="accordion-body">
-          Cappuccino valmistetaan espressosta ja vaahdotetusta maidosta.
-          Tyypillisesti juomassa on espressoa, lämmintä maitoa ja maitovaahtoa.
-        </div>
-
-      </div>
-    </div>
-
-  </div>
-
-</section>
-
-
-  <!-- Lisäominaisuus: Bootstrap Modal -->
-<section id="tietoa" class="container my-5 text-center">
-
-  <h2 class="mb-3">Tietoa sivustosta</h2>
-
-  <p>
-    Tämä sivusto esittelee erilaisia kahvijuomia Bootstrap-komponenttien avulla.
-  </p>
-
-  <!-- Modal-nappi -->
-  <button
-    type="button"
-    class="btn btn-dark"
-    data-bs-toggle="modal"
-    data-bs-target="#tietoaModal">
-
-    Lue lisää sivustosta
-  </button>
-
-</section>
-
-
-<!-- Modal-ikkuna -->
-<div
-  class="modal fade"
-  id="tietoaModal"
-  tabindex="-1"
-  aria-labelledby="tietoaModalLabel"
-  aria-hidden="true">
-
-  <div class="modal-dialog">
-
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <h2 class="modal-title fs-5" id="tietoaModalLabel">
-          Tietoa kahvisivustosta
-        </h2>
-
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Sulje">
-        </button>
-      </div>
-
-      <div class="modal-body">
-        Sivusto on tehty Bootstrapilla. Sivustolla käytetään muun muassa
-        navigaatiota, kuvakarusellia, ruudukkoa, kortteja, taulukkoa ja haitaria.
-        Modal-ikkuna toimii sivuston ylimääräisenä Bootstrap-ominaisuutena.
-      </div>
-
-      <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-secondary"
-          data-bs-dismiss="modal">
-
-          Sulje
-        </button>
-      </div>
-
-    </div>
-  </div>
-</div>
-  
   <!-- Bootstrap JavaScript -->
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
