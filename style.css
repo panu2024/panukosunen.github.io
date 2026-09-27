@@ -1,8 +1,31 @@
 /* Sivuston yleinen ulkoasu */
 body {
-  background-color: #f8f4ef;
+  background-color: #f3eadf;
   color: #2f241f;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Navigaatio */
+.navbar-custom {
+  background-color: #2f1b12;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+.navbar-brand {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.7rem;
+  font-weight: bold;
+  color: #f6e7d8;
+}
+
+.navbar-nav .nav-link {
+  color: #f6e7d8;
+  margin-left: 10px;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #d9a066;
 }
 
 /* Otsikot */
@@ -10,56 +33,90 @@ h1,
 h2,
 h3 {
   font-family: Georgia, "Times New Roman", serif;
-  color: #3e2723;
-}
-
-/* Navigaatio */
-.navbar-custom {
-  background-color: #3e2723;
-}
-
-.navbar-brand {
-  font-family: Georgia, "Times New Roman", serif;
+  color: #3b2418;
   font-weight: bold;
-  font-size: 1.5rem;
+}
+
+/* Karuselli */
+.carousel-item img {
+  filter: brightness(75%);
+}
+
+.carousel-caption {
+  background-color: rgba(0, 0, 0, 0.45);
+  border-radius: 12px;
+  padding: 15px;
+}
+
+.carousel-caption h2,
+.carousel-caption p {
+  color: white;
 }
 
 /* Kortit */
 .card {
   border: none;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: #fffaf5;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease;
 }
 
 .card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px);
 }
 
-/* Taulukon otsikko */
+.card-body {
+  padding: 24px;
+}
+
+/* Taulukko */
+.table {
+  background-color: white;
+}
+
 .table-dark {
-  --bs-table-bg: #3e2723;
+  --bs-table-bg: #3b2418;
 }
 
 /* Haitari */
-.accordion-button:not(.collapsed) {
-  background-color: #e8d8c8;
-  color: #3e2723;
+.accordion-item {
+  border-color: #d2b79c;
 }
 
-/* Omat painikkeet */
+.accordion-button {
+  font-weight: bold;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: #d9c0a7;
+  color: #2f1b12;
+}
+
+/* Oma kahvipainike */
 .btn-coffee {
-  background-color: #6f4e37;
+  background-color: #6f4328;
   color: white;
   border: none;
+  padding: 10px 22px;
+  border-radius: 8px;
 }
 
 .btn-coffee:hover {
-  background-color: #4e342e;
+  background-color: #3b2418;
   color: white;
 }
 
-/* Sivuston osioiden välistys */
+/* Sisältöosiot */
 section {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 35px;
+  padding-bottom: 35px;
+}
+
+/* Tietoa-osio */
+#tietoa {
+  background-color: #e3d2c1;
+  border-radius: 15px;
+  padding: 40px;
 }
