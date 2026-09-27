@@ -62,126 +62,185 @@
     </div>
   </nav>
 
+
   <!-- Kuvakaruselli -->
-<div id="kahviKaruselli" class="carousel slide" data-bs-ride="carousel">
+  <div id="kahviKaruselli" class="carousel slide" data-bs-ride="carousel">
 
-  <!-- Kuvien alapuolella olevat pisteet -->
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#kahviKaruselli" data-bs-slide-to="0"
-      class="active" aria-current="true" aria-label="Kuva 1"></button>
+    <!-- Kuvien alapuolella olevat pisteet -->
+    <div class="carousel-indicators">
 
-    <button type="button" data-bs-target="#kahviKaruselli" data-bs-slide-to="1"
-      aria-label="Kuva 2"></button>
+      <button
+        type="button"
+        data-bs-target="#kahviKaruselli"
+        data-bs-slide-to="0"
+        class="active"
+        aria-current="true"
+        aria-label="Kuva 1">
+      </button>
 
-    <button type="button" data-bs-target="#kahviKaruselli" data-bs-slide-to="2"
-      aria-label="Kuva 3"></button>
-  </div>
+      <button
+        type="button"
+        data-bs-target="#kahviKaruselli"
+        data-bs-slide-to="1"
+        aria-label="Kuva 2">
+      </button>
 
-  <!-- Kuvat -->
-  <div class="carousel-inner">
+      <button
+        type="button"
+        data-bs-target="#kahviKaruselli"
+        data-bs-slide-to="2"
+        aria-label="Kuva 3">
+      </button>
 
-    <div class="carousel-item active">
-      <img src="https://images.unsplash.com/photo-1510707577719-ae7c14805e3a"
-        class="d-block w-100"
-        style="height: 500px; object-fit: cover;"
-        alt="Espresso kahvikupissa">
-
-      <div class="carousel-caption d-none d-md-block">
-        <h2>Espresso</h2>
-        <p>Pieni mutta voimakas kahvijuoma.</p>
-      </div>
     </div>
 
-    <div class="carousel-item">
-      <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085"
-        class="d-block w-100"
-        style="height: 500px; object-fit: cover;"
-        alt="Kahvia ja kahvipapuja">
+    <!-- Karusellin kuvat -->
+    <div class="carousel-inner">
 
-      <div class="carousel-caption d-none d-md-block">
-        <h2>Kahvipavut</h2>
-        <p>Hyvä kahvi alkaa laadukkaista pavuista.</p>
-      </div>
-    </div>
-
-    <div class="carousel-item">
-      <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93"
-        class="d-block w-100"
-        style="height: 500px; object-fit: cover;"
-        alt="Kahvikuppi pöydällä">
-
-      <div class="carousel-caption d-none d-md-block">
-        <h2>Kahvihetki</h2>
-        <p>Kahvista voi nauttia monella eri tavalla.</p>
-      </div>
-    </div>
-
- <!-- Kahvikortit ja Bootstrap-ruudukko -->
-<section id="kahvit" class="container my-5">
-
-  <h2 class="text-center mb-4">Kahvijuomia</h2>
-
-  <div class="row g-4">
-
-    <!-- Espresso -->
-    <div class="col-md-4">
-      <div class="card h-100">
+      <div class="carousel-item active">
         <img
           src="https://images.unsplash.com/photo-1510707577719-ae7c14805e3a"
-          class="card-img-top"
-          style="height: 250px; object-fit: cover;"
+          class="d-block w-100"
+          style="height: 500px; object-fit: cover;"
           alt="Espresso kahvikupissa">
 
-        <div class="card-body">
-          <h3 class="card-title">Espresso</h3>
-          <p class="card-text">
-            Espresso on pieni ja voimakas kahvijuoma, joka valmistetaan
-            paineella hienoksi jauhetusta kahvista.
-          </p>
+        <div class="carousel-caption d-none d-md-block">
+          <h2>Espresso</h2>
+          <p>Pieni mutta voimakas kahvijuoma.</p>
         </div>
       </div>
-    </div>
 
-    <!-- Cappuccino -->
-    <div class="col-md-4">
-      <div class="card h-100">
-        <img
-          src="https://images.unsplash.com/photo-1534778101976-62847782c213"
-          class="card-img-top"
-          style="height: 250px; object-fit: cover;"
-          alt="Cappuccino kahvikupissa">
-
-        <div class="card-body">
-          <h3 class="card-title">Cappuccino</h3>
-          <p class="card-text">
-            Cappuccino valmistetaan espressosta ja vaahdotetusta maidosta.
-            Se on pehmeä ja täyteläinen kahvijuoma.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Suodatinkahvi -->
-    <div class="col-md-4">
-      <div class="card h-100">
+      <div class="carousel-item">
         <img
           src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085"
-          class="card-img-top"
-          style="height: 250px; object-fit: cover;"
-          alt="Suodatinkahvia ja kahvipapuja">
+          class="d-block w-100"
+          style="height: 500px; object-fit: cover;"
+          alt="Kahvia ja kahvipapuja">
 
-        <div class="card-body">
-          <h3 class="card-title">Suodatinkahvi</h3>
-          <p class="card-text">
-            Suodatinkahvi on Suomessa suosittu tapa valmistaa kahvia.
-            Sen maku on yleensä espressokahvia kevyempi.
-          </p>
+        <div class="carousel-caption d-none d-md-block">
+          <h2>Kahvipavut</h2>
+          <p>Hyvä kahvi alkaa laadukkaista pavuista.</p>
         </div>
       </div>
+
+      <div class="carousel-item">
+        <img
+          src="https://images.unsplash.com/photo-1509042239860-f550ce710b93"
+          class="d-block w-100"
+          style="height: 500px; object-fit: cover;"
+          alt="Kahvikuppi pöydällä">
+
+        <div class="carousel-caption d-none d-md-block">
+          <h2>Kahvihetki</h2>
+          <p>Kahvista voi nauttia monella eri tavalla.</p>
+        </div>
+      </div>
+
     </div>
 
+    <!-- Edellinen kuva -->
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#kahviKaruselli"
+      data-bs-slide="prev">
+
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Edellinen</span>
+    </button>
+
+    <!-- Seuraava kuva -->
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#kahviKaruselli"
+      data-bs-slide="next">
+
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Seuraava</span>
+    </button>
+
   </div>
-</section>
+
+
+  <!-- Kahvikortit ja Bootstrap-ruudukko -->
+  <section id="kahvit" class="container my-5">
+
+    <h2 class="text-center mb-4">Kahvijuomia</h2>
+
+    <div class="row g-4">
+
+      <!-- Espresso -->
+      <div class="col-md-4">
+        <div class="card h-100">
+
+          <img
+            src="https://images.unsplash.com/photo-1510707577719-ae7c14805e3a"
+            class="card-img-top"
+            style="height: 250px; object-fit: cover;"
+            alt="Espresso kahvikupissa">
+
+          <div class="card-body">
+            <h3 class="card-title">Espresso</h3>
+
+            <p class="card-text">
+              Espresso on pieni ja voimakas kahvijuoma, joka valmistetaan
+              paineella hienoksi jauhetusta kahvista.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- Cappuccino -->
+      <div class="col-md-4">
+        <div class="card h-100">
+
+          <img
+            src="https://images.unsplash.com/photo-1534778101976-62847782c213"
+            class="card-img-top"
+            style="height: 250px; object-fit: cover;"
+            alt="Cappuccino kahvikupissa">
+
+          <div class="card-body">
+            <h3 class="card-title">Cappuccino</h3>
+
+            <p class="card-text">
+              Cappuccino valmistetaan espressosta ja vaahdotetusta maidosta.
+              Se on pehmeä ja täyteläinen kahvijuoma.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- Suodatinkahvi -->
+      <div class="col-md-4">
+        <div class="card h-100">
+
+          <img
+            src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085"
+            class="card-img-top"
+            style="height: 250px; object-fit: cover;"
+            alt="Suodatinkahvia ja kahvipapuja">
+
+          <div class="card-body">
+            <h3 class="card-title">Suodatinkahvi</h3>
+
+            <p class="card-text">
+              Suodatinkahvi on Suomessa suosittu tapa valmistaa kahvia.
+              Sen maku on yleensä espressokahvia kevyempi.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
 
   <!-- Bootstrap JavaScript -->
   <script
