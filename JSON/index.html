@@ -86,12 +86,30 @@
 
       .then(function(data) {
 
+        // Sisältö-taulukon käsittely
         let sisaltoLista = "";
 
         data.sisalto.forEach(function(asia) {
           sisaltoLista += `<li>${asia}</li>`;
         });
 
+
+        // Tekniikat-taulukon käsittely
+        let tekniikatLista = "";
+
+        data.tekniikat.forEach(function(tekniikka) {
+          tekniikatLista += `
+            <li>
+              ${tekniikka.aihe}:
+              <a href="${tekniikka.linkki}" target="_blank">
+                ${tekniikka.linkki}
+              </a>
+            </li>
+          `;
+        });
+
+
+        // JSON-datan näyttäminen sivulla
         document.getElementById("vastaus").innerHTML = `
           <h2>${data.otsikko}</h2>
 
@@ -124,6 +142,12 @@
 
           <ul>
             ${sisaltoLista}
+          </ul>
+
+          <h3>Tekniikat</h3>
+
+          <ul>
+            ${tekniikatLista}
           </ul>
         `;
 
