@@ -15,18 +15,28 @@
 
 <body>
   
-  <script>
+<script>
   fetch("tietue.JSON")
     .then(function(response) {
       return response.json();
     })
     .then(function(data) {
-      console.log(data);
+
+      document.getElementById("vastaus").innerHTML = `
+        <h2>${data.otsikko}</h2>
+        <p>${data.kuvaus}</p>
+        <img
+          src="${data.kuva}"
+          alt="Digitekniikat"
+          class="img-fluid"
+          style="max-width: 500px;">
+      `;
+
     })
     .catch(function(error) {
       console.log("Virhe JSON-datan haussa:", error);
     });
-</script>
+  </script>
   
   <!-- Navigaatio -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
