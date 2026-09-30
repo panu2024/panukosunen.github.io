@@ -146,10 +146,10 @@
       `;
 
 
-      // Käydään sisältö-taulukko läpi
-      obj.sisalto.forEach(function(asia) {
-        tiedot += `<li>${asia}</li>`;
-      });
+      // Käydään sisältö-taulukko läpi for-silmukalla
+      for (let i = 0; i < obj.sisalto.length; i++) {
+        tiedot += `<li>${obj.sisalto[i]}</li>`;
+      }
 
 
       // Suljetaan sisältölista
@@ -163,29 +163,29 @@
       `;
 
 
-      // Käydään tekniikat-taulukko läpi
-      obj.tekniikat.forEach(function(tekniikka) {
+      // Käydään tekniikat-taulukko läpi for-silmukalla
+      for (let i = 0; i < obj.tekniikat.length; i++) {
 
         tiedot += `
           <li>
-            <strong>${tekniikka.aihe}</strong>:
+            <strong>${obj.tekniikat[i].aihe}</strong>:
             <a
-              href="${tekniikka.linkki}"
+              href="${obj.tekniikat[i].linkki}"
               target="_blank"
               rel="noopener noreferrer">
-              ${tekniikka.linkki}
+              ${obj.tekniikat[i].linkki}
             </a>
           </li>
         `;
 
-      });
+      }
 
 
       // Suljetaan tekniikkalista
       tiedot += `</ul>`;
 
 
-      // Tulostetaan kaikki tiedot sivulle
+      // Kirjoitetaan tiedot-muuttuja sivulle
       document.getElementById("vastaus").innerHTML = tiedot;
     }
 
