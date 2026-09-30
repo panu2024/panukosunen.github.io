@@ -1,18 +1,27 @@
 /* Sivuston yleinen ulkoasu */
 body {
-  background-color: #f4f7fb;
-  color: #222;
+  background-color: #eef2f7;
+  color: #1f2933;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 /* Navigaatio */
 .navbar {
-  background-color: #0d6efd !important;
+  background-color: #0b1f3a !important;
 }
 
 .navbar-brand {
+  color: #ffffff !important;
   font-weight: bold;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
+}
+
+.navbar .nav-link {
+  color: #ffffff !important;
+}
+
+.navbar .nav-link:hover {
+  color: #b9d6ff !important;
 }
 
 /* Pääsisältö */
@@ -20,21 +29,46 @@ main {
   max-width: 900px;
 }
 
-/* Otsikot */
-h1,
+/* Sivun pääotsikko */
+h1 {
+  color: #0b1f3a;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* JSON-datan otsikot */
 h2,
 h3 {
-  color: #0b63ce;
+  color: #123f73;
   font-weight: bold;
+}
+
+/* JSON-sisällön laatikko */
+#vastaus {
+  background-color: #ffffff;
+  padding: 30px;
+  margin-top: 30px;
+  border-radius: 12px;
+  border-left: 6px solid #123f73;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
 }
 
 /* JSONista tuleva kuva */
 #vastaus img {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 25px;
   border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-/* Sisältölistat */
+/* Tekstit */
+#vastaus p {
+  line-height: 1.6;
+}
+
+/* Listat */
 #vastaus ul {
   padding-left: 25px;
 }
@@ -45,21 +79,20 @@ h3 {
 
 /* Linkit */
 #vastaus a {
-  color: #0d6efd;
-  text-decoration: none;
-}
-
-#vastaus a:hover {
+  color: #0056b3;
+  font-weight: 600;
   text-decoration: underline;
 }
 
-/* JSON-sisällön laatikko */
-#vastaus {
-  background-color: white;
-  padding: 30px;
-  margin-top: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+#vastaus a:hover {
+  color: #003b7a;
+}
+
+/* Näppäimistökäytön fokus */
+a:focus,
+button:focus {
+  outline: 3px solid #ffbf47;
+  outline-offset: 3px;
 }
 
 /* Mobiilinäkymä */
@@ -71,6 +104,14 @@ h3 {
 
   h1 {
     font-size: 1.8rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
   }
 
 }
