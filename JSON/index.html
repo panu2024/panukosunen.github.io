@@ -78,7 +78,7 @@
   </script>
 
 
-  <!-- JSON-datan haku -->
+  <!-- JSON-datan haku ja käsittely -->
   <script>
 
     // Haetaan JSON-tiedosto
@@ -94,7 +94,7 @@
         kerro(responseJson);
       })
 
-      // Näytetään virheilmoitus, jos hakeminen epäonnistuu
+      // Näytetään virheilmoitus, jos tiedon hakeminen epäonnistuu
       .catch(function(error) {
         document.getElementById("vastaus").innerHTML =
           "<p>Tietoa ei pystytä hakemaan.</p>";
@@ -102,21 +102,71 @@
 
 
     // Näytetään JSON-tiedoston sisältö sivulla
-    function kerro(data) {
+    function kerro(obj) {
 
-      // Sisältö-taulukon käsittely
-      let sisaltoLista = "";
+      // Otsikko, kuvaus ja kuva
+      let tiedot = `
+        <h2>${obj.otsikko}</h2>
 
-      data.sisalto.forEach(function(asia) {
-        sisaltoLista += `<li>${asia}</li>`;
+        <p>${obj.kuvaus}</p>
+
+        <img
+          src="${obj.kuva}"
+          alt="Digitekniikat"
+          class="img-fluid mb-4"
+          style="max-width: 500px;">
+      `;
+
+
+      // Opintojakson tiedot
+      tiedot += `
+        <h3>Opintojakso</h3>
+
+        <p>
+          <strong>Nimi:</strong>
+          ${obj.opintojakso.nimi}
+        </p>
+
+        <p>
+          <strong>Tunnus:</strong>
+          ${obj.opintojakso.tunnus}
+        </p>
+
+        <p>
+          <strong>Opintopisteet:</strong>
+          ${obj.opintojakso.opintopisteet}
+        </p>
+      `;
+
+
+      // Sisältö-osion otsikko
+      tiedot += `
+        <h3>Sisältö</h3>
+        <ul>
+      `;
+
+
+      // Käydään sisältö-taulukko läpi
+      obj.sisalto.forEach(function(asia) {
+        tiedot += `<li>${asia}</li>`;
       });
 
 
-      // Tekniikat-taulukon käsittely
-      let tekniikatLista = "";
+      // Suljetaan sisältölista
+      tiedot += `</ul>`;
 
-      data.tekniikat.forEach(function(tekniikka) {
-        tekniikatLista += `
+
+      // Tekniikat-osion otsikko
+      tiedot += `
+        <h3>Tekniikat</h3>
+        <ul>
+      `;
+
+
+      // Käydään tekniikat-taulukko läpi
+      obj.tekniikat.forEach(function(tekniikka) {
+
+        tiedot += `
           <li>
             <strong>${tekniikka.aihe}</strong>:
             <a
@@ -127,50 +177,16 @@
             </a>
           </li>
         `;
+
       });
 
 
-      // Tulostetaan tiedot sivulle
-      document.getElementById("vastaus").innerHTML = `
-        <h2>${data.otsikko}</h2>
+      // Suljetaan tekniikkalista
+      tiedot += `</ul>`;
 
-        <p>${data.kuvaus}</p>
 
-        <img
-          src="${data.kuva}"
-          alt="Digitekniikat"
-          class="img-fluid mb-4"
-          style="max-width: 500px;">
-
-        <h3>Opintojakso</h3>
-
-        <p>
-          <strong>Nimi:</strong>
-          ${data.opintojakso.nimi}
-        </p>
-
-        <p>
-          <strong>Tunnus:</strong>
-          ${data.opintojakso.tunnus}
-        </p>
-
-        <p>
-          <strong>Opintopisteet:</strong>
-          ${data.opintojakso.opintopisteet}
-        </p>
-
-        <h3>Sisältö</h3>
-
-        <ul>
-          ${sisaltoLista}
-        </ul>
-
-        <h3>Tekniikat</h3>
-
-        <ul>
-          ${tekniikatLista}
-        </ul>
-      `;
+      // Tulostetaan kaikki tiedot sivulle
+      document.getElementById("vastaus").innerHTML = tiedot;
     }
 
   </script>
