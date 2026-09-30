@@ -19,7 +19,7 @@
 <body>
 
   <!-- Navigaatio -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
 
       <a class="navbar-brand" href="#">JSON-tehtävä</a>
@@ -78,87 +78,100 @@
   </script>
 
 
-  <!-- JSON-datan haku Fetch API:n avulla -->
+  <!-- JSON-datan haku -->
   <script>
 
+    // Haetaan JSON-tiedosto
     fetch("tietue.JSON")
 
+      // Muutetaan vastaus JavaScript-objektiksi
       .then(function(response) {
         return response.json();
       })
 
-      .then(function(data) {
-
-        // Sisältö-taulukon käsittely
-        let sisaltoLista = "";
-
-        data.sisalto.forEach(function(asia) {
-          sisaltoLista += `<li>${asia}</li>`;
-        });
-
-
-        // Tekniikat-taulukon käsittely
-        let tekniikatLista = "";
-
-        data.tekniikat.forEach(function(tekniikka) {
-          tekniikatLista += `
-            <li>
-              ${tekniikka.aihe}:
-              <a href="${tekniikka.linkki}" target="_blank">
-                ${tekniikka.linkki}
-              </a>
-            </li>
-          `;
-        });
-
-
-        // JSON-datan näyttäminen sivulla
-        document.getElementById("vastaus").innerHTML = `
-          <h2>${data.otsikko}</h2>
-
-          <p>${data.kuvaus}</p>
-
-          <img
-            src="${data.kuva}"
-            alt="Digitekniikat"
-            class="img-fluid mb-4"
-            style="max-width: 500px;">
-
-          <h3>Opintojakso</h3>
-
-          <p>
-            <strong>Nimi:</strong>
-            ${data.opintojakso.nimi}
-          </p>
-
-          <p>
-            <strong>Tunnus:</strong>
-            ${data.opintojakso.tunnus}
-          </p>
-
-          <p>
-            <strong>Opintopisteet:</strong>
-            ${data.opintojakso.opintopisteet}
-          </p>
-
-          <h3>Sisältö</h3>
-
-          <ul>
-            ${sisaltoLista}
-          </ul>
-
-          <h3>Tekniikat</h3>
-
-          <ul>
-            ${tekniikatLista}
-          </ul>
-        `;
-
+      // Välitetään JSON-data kerro-funktiolle
+      .then(function(responseJson) {
+        kerro(responseJson);
       })
 
+      // Näytetään virheilmoitus, jos hakeminen epäonnistuu
       .catch(function(error) {
-        console.log("Virhe JSON-datan haussa:", error);
+        document.getElementById("vastaus").innerHTML =
+          "<p>Tietoa ei pystytä hakemaan.</p>";
       });
+
+
+    // Näytetään JSON-tiedoston sisältö sivulla
+    function kerro(data) {
+
+      // Sisältö-taulukon käsittely
+      let sisaltoLista = "";
+
+      data.sisalto.forEach(function(asia) {
+        sisaltoLista += `<li>${asia}</li>`;
+      });
+
+
+      // Tekniikat-taulukon käsittely
+      let tekniikatLista = "";
+
+      data.tekniikat.forEach(function(tekniikka) {
+        tekniikatLista += `
+          <li>
+            <strong>${tekniikka.aihe}</strong>:
+            <a
+              href="${tekniikka.linkki}"
+              target="_blank"
+              rel="noopener noreferrer">
+              ${tekniikka.linkki}
+            </a>
+          </li>
+        `;
+      });
+
+
+      // Tulostetaan tiedot sivulle
+      document.getElementById("vastaus").innerHTML = `
+        <h2>${data.otsikko}</h2>
+
+        <p>${data.kuvaus}</p>
+
+        <img
+          src="${data.kuva}"
+          alt="Digitekniikat"
+          class="img-fluid mb-4"
+          style="max-width: 500px;">
+
+        <h3>Opintojakso</h3>
+
+        <p>
+          <strong>Nimi:</strong>
+          ${data.opintojakso.nimi}
+        </p>
+
+        <p>
+          <strong>Tunnus:</strong>
+          ${data.opintojakso.tunnus}
+        </p>
+
+        <p>
+          <strong>Opintopisteet:</strong>
+          ${data.opintojakso.opintopisteet}
+        </p>
+
+        <h3>Sisältö</h3>
+
+        <ul>
+          ${sisaltoLista}
+        </ul>
+
+        <h3>Tekniikat</h3>
+
+        <ul>
+          ${tekniikatLista}
+        </ul>
+      `;
+    }
 
   </script>
 
