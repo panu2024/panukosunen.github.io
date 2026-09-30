@@ -86,6 +86,12 @@
 
       .then(function(data) {
 
+        let sisaltoLista = "";
+
+        data.sisalto.forEach(function(asia) {
+          sisaltoLista += `<li>${asia}</li>`;
+        });
+
         document.getElementById("vastaus").innerHTML = `
           <h2>${data.otsikko}</h2>
 
@@ -113,6 +119,12 @@
             <strong>Opintopisteet:</strong>
             ${data.opintojakso.opintopisteet}
           </p>
+
+          <h3>Sisältö</h3>
+
+          <ul>
+            ${sisaltoLista}
+          </ul>
         `;
 
       })
