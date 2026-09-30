@@ -14,7 +14,20 @@
 </head>
 
 <body>
-
+  
+  <script>
+  fetch("tietue.JSON")
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(data) {
+      console.log(data);
+    })
+    .catch(function(error) {
+      console.log("Virhe JSON-datan haussa:", error);
+    });
+</script>
+  
   <!-- Navigaatio -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
