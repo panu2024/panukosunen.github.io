@@ -117,9 +117,10 @@
   <!-- Pokemon-haun JavaScript -->
   <script>
 
+    // Funktiota kutsutaan Hae-painikkeesta
     function poke() {
 
-      // Tallennetaan käyttäjän kirjoittama Pokemonin nimi pienillä kirjaimilla
+      // Tallennetaan annettu Pokemonin nimi pienillä kirjaimilla
       const pokeName = document
         .getElementById("pokemonName")
         .value
@@ -132,31 +133,19 @@
 
 
       // Haetaan Pokemonin tiedot PokeAPI:sta
-      fetch("https://pokeapi.co/api/v2/pokemon/" + pokeName)
+      fetch(`https://pokeapi.co/api/v2/pokemon/${pokeName}`)
 
-        // Muutetaan vastaus JavaScript-objektiksi
+        // Muutetaan vastaus JSON-muotoon
         .then(function(response) {
           return response.json();
         })
 
-        // Käsitellään haettu Pokemon-data
-        .then(function(data) {
-
-          // Näytetään Pokemonin nimi
-          document.getElementById("nimi").innerHTML =
-            "<h2>" + name + "</h2>";
-
-          // Näytetään Pokemonin kuva
-          document.getElementById("kuva2").innerHTML =
-            '<img src="' +
-            data.sprites.front_default +
-            '" alt="' +
-            name +
-            '">';
-
+        // Välitetään JSON-vastaus pokekuva-funktiolle
+        .then(function(responseJson) {
+          pokekuva(responseJson, name);
         })
 
-        // Jos Pokemonia ei löydy tai haussa tapahtuu virhe
+        // Jos haussa tapahtuu virhe
         .catch(function(error) {
 
           document.getElementById("nimi").innerHTML =
@@ -165,6 +154,24 @@
           document.getElementById("kuva2").innerHTML = "";
 
         });
+
+    }
+
+
+    // Näytetään haetun Pokemonin nimi ja kuva
+    function pokekuva(obj, name) {
+
+      // Pokemonin nimi
+      document.getElementById("nimi").innerHTML =
+        "<h2>" + name + "</h2>";
+
+      // Pokemonin kuva
+      document.getElementById("kuva2").innerHTML =
+        '<img src="' +
+        obj.sprites.front_default +
+        '" alt="' +
+        name +
+        '">';
 
     }
 
