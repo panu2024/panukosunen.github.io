@@ -1,0 +1,15 @@
+{
+  "nimi": "Digitekniikat",
+  "osallistujienLukumaara": 5,
+  "osallistujat": [
+    "Aino Virtanen",
+    "Elias Laine",
+    "Laura Niemi",
+    "Mikko Salmi",
+    "Sofia Mäkinen"
+  ],
+  "alkamisaika": "13.1.2025",
+  "loppumisaika": "14.3.2025",
+  "kestoViikkoina": 8,
+  "kuva": "https://jaakkola.github.io/json/digi.JPG"
+}
