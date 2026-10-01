@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="fi">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Digitekniikat toteutus</title>
+
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+
+  <!-- Oma CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- Navigaatio -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+
+      <a class="navbar-brand" href="index.html">JSON-tehtävä</a>
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Avaa navigaatio">
+
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Etusivu</a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link active"
+              href="toteutus.html"
+              aria-current="page">
+              Toteutus
+            </a>
+          </li>
+
+        </ul>
+      </div>
+
+    </div>
+  </nav>
+
+
+  <!-- Sivun pääsisältö -->
+  <main class="container my-5">
+
+    <h1>Digitekniikat-toteutus</h1>
+
+    <p>
+      Tälle sivulle haetaan toteutuksen tiedot JSON-tiedostosta Fetch API:n avulla.
+    </p>
+
+    <!-- JSON-data näytetään tässä -->
+    <div id="vastaus"></div>
+
+  </main>
+
+
+  <!-- Bootstrap JavaScript -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+  </script>
+
+
+  <!-- JSON-datan haku -->
+  <script>
+
+    // Haetaan toteutus.JSON
+    fetch("toteutus.JSON")
+
+      // Muutetaan vastaus JavaScript-objektiksi
+      .then(function(response) {
+        return response.json();
+      })
+
+      // Välitetään data kerro-funktiolle
+      .then(function(responseJson) {
+        kerro(responseJson);
+      })
+
+      // Virheilmoitus, jos JSON-datan haku epäonnistuu
+      .catch(function(error) {
+        document.getElementById("vastaus").innerHTML =
+          "<p>Tietoa ei pystytä hakemaan.</p>";
+      });
+
+
+    // Näytetään toteutuksen tiedot sivulla
+    function kerro(obj) {
+
+      let tiedot = `
+        <h2>${obj.nimi}</h2>
+
+        <p>
+          <strong>Osallistujien lukumäärä:</strong>
+          ${obj.osallistujienLukumaara}
+        </p>
+
+        <p>
+          <strong>Alkamisaika:</strong>
+          ${obj.alkamisaika}
+        </p>
+
+        <p>
+          <strong>Loppumisaika:</strong>
+          ${obj.loppumisaika}
+        </p>
+
+        <p>
+          <strong>Kesto:</strong>
+          ${obj.kestoViikkoina} viikkoa
+        </p>
+
+        <img
+          src="${obj.kuva}"
+          alt="Digitekniikat"
+          class="img-fluid mb-4"
+          style="max-width: 500px;">
+
+        <h3>Osallistujat</h3>
+
+        <ul>
+      `;
+
+
+      // Käydään osallistujat-taulukko läpi for-silmukalla
+      for (let i = 0; i < obj.osallistujat.length; i++) {
+        tiedot += `<li>${obj.osallistujat[i]}</li>`;
+      }
+
+
+      tiedot += `</ul>`;
+
+
+      // Näytetään tiedot sivulla
+      document.getElementById("vastaus").innerHTML = tiedot;
+    }
+
+  </script>
+
+</body>
+
+</html>
