@@ -161,17 +161,23 @@
     // Näytetään haetun Pokemonin nimi ja kuva
     function pokekuva(obj, name) {
 
-      // Pokemonin nimi
-      document.getElementById("nimi").innerHTML =
-        "<h2>" + name + "</h2>";
+      // Tallennetaan Pokemonin kuvan osoite muuttujaan
+      let pokeurl = obj.sprites.front_default;
 
-      // Pokemonin kuva
+      // Näytetään Pokemonin kuva
       document.getElementById("kuva2").innerHTML =
         '<img src="' +
-        obj.sprites.front_default +
+        pokeurl +
         '" alt="' +
         name +
         '">';
+
+      // Näytetään Pokemonin nimi
+      document.getElementById("nimi").innerHTML =
+        "<h2>" + name + "</h2>";
+
+      // Tyhjennetään hakukenttä onnistuneen haun jälkeen
+      document.getElementById("pokemonName").value = "";
 
     }
 
