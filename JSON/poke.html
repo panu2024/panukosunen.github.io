@@ -103,7 +103,13 @@
     </div>
 
     <!-- Pokemonin kuva näytetään tässä -->
-    <p id="kuva2"></p>
+    <div id="kuva2"></div>
+
+    <!-- Käännä-painike tulee tähän vasta haun jälkeen -->
+    <div id="kaannaAlue" class="my-3"></div>
+
+    <!-- Pokemonin lisätiedot tulevat tähän käännön jälkeen -->
+    <div id="lisatiedot"></div>
 
   </main>
 
@@ -117,26 +123,43 @@
   <!-- Pokemon-haun JavaScript -->
   <script>
 
+    // Tänne tallennetaan viimeksi haettu Pokemon
+    let nykyinenPokemon = null;
+
+
     // Funktiota kutsutaan Hae-painikkeesta
     function poke() {
 
-      // Tallennetaan annettu Pokemonin nimi pienillä kirjaimilla
-      const pokeName = document
-        .getElementById("pokemonName")
-        .value
-        .toLowerCase();
-
-      // Tallennetaan nimi myös alkuperäisessä muodossa
+      // Tallennetaan käyttäjän antama nimi
       let name = document
         .getElementById("pokemonName")
-        .value;
+        .value
+        .trim();
+
+      // Tarkistetaan, ettei hakukenttä ole tyhjä
+      if (name === "") {
+
+        document.getElementById("nimi").innerHTML =
+          "<p>Kirjoita ensin Pokemonin nimi.</p>";
+
+        return;
+      }
+
+
+      // Muutetaan nimi pieniksi kirjaimiksi API-hakua varten
+      const pokeName = name.toLowerCase();
 
 
       // Haetaan Pokemonin tiedot PokeAPI:sta
       fetch(`https://pokeapi.co/api/v2/pokemon/${pokeName}`)
 
-        // Muutetaan vastaus JSON-muotoon
+        // Tarkistetaan, onnistuiko haku
         .then(function(response) {
+
+          if (!response.ok) {
+            throw new Error("Pokemonia ei löytynyt");
+          }
+
           return response.json();
         })
 
@@ -152,16 +175,21 @@
             "<p>Pokemonia ei löytynyt.</p>";
 
           document.getElementById("kuva2").innerHTML = "";
+          document.getElementById("kaannaAlue").innerHTML = "";
+          document.getElementById("lisatiedot").innerHTML = "";
 
         });
 
     }
 
 
-    // Näytetään haetun Pokemonin nimi ja kuva
+    // Näytetään haetun Pokemonin nimi ja etupuolen kuva
     function pokekuva(obj, name) {
 
-      // Tallennetaan Pokemonin kuvan osoite muuttujaan
+      // Tallennetaan haettu Pokemon myöhempää käyttöä varten
+      nykyinenPokemon = obj;
+
+      // Tallennetaan Pokemonin etupuolen kuvan osoite
       let pokeurl = obj.sprites.front_default;
 
       // Näytetään Pokemonin kuva
@@ -170,14 +198,87 @@
         pokeurl +
         '" alt="' +
         name +
-        '">';
+        '" class="img-fluid">';
 
       // Näytetään Pokemonin nimi
       document.getElementById("nimi").innerHTML =
         "<h2>" + name + "</h2>";
 
-      // Tyhjennetään hakukenttä onnistuneen haun jälkeen
+      // Lisätään Käännä-painike vasta onnistuneen haun jälkeen
+      document.getElementById("kaannaAlue").innerHTML =
+        '<button type="button" class="btn btn-secondary" onclick="kaanna()">Käännä</button>';
+
+      // Tyhjennetään mahdollisen edellisen Pokemonin lisätiedot
+      document.getElementById("lisatiedot").innerHTML = "";
+
+      // Tyhjennetään hakukenttä
       document.getElementById("pokemonName").value = "";
+
+    }
+
+
+    // Käännetään Pokemon selkäpuolelle ja näytetään lisätiedot
+    function kaanna() {
+
+      // Tarkistetaan, että Pokemon on haettu
+      if (nykyinenPokemon === null) {
+        return;
+      }
+
+
+      // Haetaan Pokemonin selkäpuolen kuva
+      let takaKuva = nykyinenPokemon.sprites.back_default;
+
+
+      // Tarkistetaan, löytyykö selkäpuolen kuva
+      if (takaKuva !== null) {
+
+        document.getElementById("kuva2").innerHTML =
+          '<img src="' +
+          takaKuva +
+          '" alt="Pokemon selkäpuolelta" class="img-fluid">';
+
+      } else {
+
+        document.getElementById("kuva2").innerHTML =
+          "<p>Selkäpuolen kuvaa ei ole saatavilla.</p>";
+
+      }
+
+
+      // Selvitetään Pokemonin tyyppi tai tyypit
+      let tyypit = "";
+
+      for (let i = 0; i < nykyinenPokemon.types.length; i++) {
+
+        tyypit += nykyinenPokemon.types[i].type.name;
+
+        if (i < nykyinenPokemon.types.length - 1) {
+          tyypit += ", ";
+        }
+
+      }
+
+
+      // Näytetään kolme muuta Pokemonin ominaisuutta
+      document.getElementById("lisatiedot").innerHTML = `
+        <h3>Pokemonin ominaisuudet</h3>
+
+        <p>
+          <strong>Tyyppi:</strong>
+          ${tyypit}
+        </p>
+
+        <p>
+          <strong>Pituus:</strong>
+          ${nykyinenPokemon.height}
+        </p>
+
+        <p>
+          <strong>Paino:</strong>
+          ${nykyinenPokemon.weight}
+        </p>
+      `;
 
     }
 
