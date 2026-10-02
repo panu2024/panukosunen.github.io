@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Säätiedot</title>
+  <title>Sää Helsingissä</title>
 
   <!-- Bootstrap CSS -->
   <link
@@ -78,15 +78,11 @@
   <!-- Sivun pääsisältö -->
   <main class="container my-5">
 
-    <h1>Säätiedot</h1>
+    <h1>Sää Helsingissä</h1>
 
-    <p>
-      Tälle sivulle haetaan säätietoja JSON-muodossa OpenWeather-palvelusta.
-    </p>
-
-    <!-- Säätiedot näytetään myöhemmin tässä -->
+    <!-- Säätiedot näytetään tässä -->
     <div id="vastaus">
-      Säätietoja haetaan...
+      <p>Säätietoja haetaan...</p>
     </div>
 
   </main>
@@ -95,6 +91,104 @@
   <!-- Bootstrap JavaScript -->
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+  </script>
+
+
+  <!-- Säätietojen haku -->
+  <script>
+
+    // OpenWeather API-avain
+    const apiKey = "665ecd56dfc08dbb50feb8b8f5034e28";
+
+    // Helsingin säätietojen API-osoite
+    const url =
+      `https://api.openweathermap.org/data/2.5/weather?id=658225&appid=${apiKey}&lang=fi&units=metric`;
+
+
+    // Haetaan säätiedot OpenWeather-palvelusta
+    fetch(url)
+
+      // Muutetaan vastaus JSON-muodosta JavaScript-objektiksi
+      .then(function(response) {
+
+        if (!response.ok) {
+          throw new Error("Säätietojen hakeminen epäonnistui");
+        }
+
+        return response.json();
+      })
+
+      // Välitetään säätiedot funktiolle
+      .then(function(data) {
+        naytaSaa(data);
+      })
+
+      // Jos haussa tapahtuu virhe
+      .catch(function(error) {
+
+        document.getElementById("vastaus").innerHTML =
+          "<p>Säätietoja ei pystytä hakemaan.</p>";
+
+      });
+
+
+    // Näytetään säätiedot sivulla
+    function naytaSaa(data) {
+
+      // Haetaan kellonaika, jolloin sivu ladattiin
+      const aika = new Date().toLocaleTimeString(
+        "fi-FI",
+        {
+          hour: "2-digit",
+          minute: "2-digit"
+        }
+      );
+
+
+      // Haetaan sääikonin tunnus JSON-datasta
+      const ikoni = data.weather[0].icon;
+
+      // Muodostetaan sääikonin osoite
+      const ikoniUrl =
+        `https://openweathermap.org/img/wn/${ikoni}@2x.png`;
+
+
+      // Rakennetaan sivulle näytettävä sisältö
+      let tiedot = `
+        <p>
+          <strong>Sää kello ${aika}</strong>
+        </p>
+
+        <h2>Sää</h2>
+
+        <p>
+          ${data.weather[0].description}
+        </p>
+
+        <h2>Lämpötila</h2>
+
+        <p>
+          ${data.main.temp} °C
+        </p>
+
+        <h2>Tuuli</h2>
+
+        <p>
+          ${data.wind.speed} m/s
+        </p>
+
+        <h2>Sääkuva</h2>
+
+        <img
+          src="${ikoniUrl}"
+          alt="${data.weather[0].description}">
+      `;
+
+
+      // Tulostetaan tiedot sivulle
+      document.getElementById("vastaus").innerHTML = tiedot;
+    }
+
   </script>
 
 </body>
