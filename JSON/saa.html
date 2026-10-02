@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="fi">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Säätiedot</title>
+
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+
+  <!-- Oma CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- Navigaatio -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+
+      <a class="navbar-brand" href="index.html">JSON-tehtävä</a>
+
+      <!-- Hampurilaispainike -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Avaa navigaatio">
+
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Navigaation linkit -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">
+              Etusivu
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="toteutus.html">
+              Toteutus
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="poke.html">
+              Pokemon-haku
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link active"
+              href="saa.html"
+              aria-current="page">
+              Sää
+            </a>
+          </li>
+
+        </ul>
+      </div>
+
+    </div>
+  </nav>
+
+
+  <!-- Sivun pääsisältö -->
+  <main class="container my-5">
+
+    <h1>Säätiedot</h1>
+
+    <p>
+      Tälle sivulle haetaan säätietoja JSON-muodossa OpenWeather-palvelusta.
+    </p>
+
+    <!-- Säätiedot näytetään myöhemmin tässä -->
+    <div id="vastaus">
+      Säätietoja haetaan...
+    </div>
+
+  </main>
+
+
+  <!-- Bootstrap JavaScript -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+  </script>
+
+</body>
+
+</html>
