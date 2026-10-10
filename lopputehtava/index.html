@@ -1,1 +1,279 @@
-<h1>Country Explorer</h1>
+<!doctype html>
+<html lang="fi">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Country Explorer</title>
+
+  <!-- Bootstrap 5 -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+
+  <!-- Oma CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- Yläosa -->
+  <header class="p-5 text-white text-center hero">
+    <div class="container">
+
+      <h1 class="display-4 fw-bold">
+        Country Explorer
+      </h1>
+
+      <p class="lead">
+        Tutustu maailman maihin helposti yhdestä paikasta.
+      </p>
+
+    </div>
+  </header>
+
+
+  <!-- Navigaatio -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+
+      <a
+        class="navbar-brand fw-bold"
+        href="index.html">
+        Country Explorer
+      </a>
+
+      <!-- Hampurilaispainike -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Avaa navigaatio">
+
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+
+      <!-- Navigaation linkit -->
+      <div
+        class="collapse navbar-collapse"
+        id="navbarNav">
+
+        <ul class="navbar-nav ms-auto">
+
+          <li class="nav-item">
+            <a
+              class="nav-link active"
+              href="#etusivu">
+              Etusivu
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="#haku">
+              Maahaku
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              href="#suosikit">
+              Suosikit
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </div>
+  </nav>
+
+
+  <!-- Pääsisältö -->
+  <main>
+
+    <!-- Esittely -->
+    <section
+      id="etusivu"
+      class="container py-5">
+
+      <div class="row align-items-center">
+
+        <div class="col-lg-7">
+
+          <h2 class="mb-3">
+            Löydä tietoa maailman maista
+          </h2>
+
+          <p class="lead">
+            Country Explorer auttaa tutustumaan eri maihin nopeasti.
+            Voit hakea maita ja tarkastella esimerkiksi niiden
+            pääkaupunkia, väkilukua, maanosaa ja lippua.
+          </p>
+
+          <a
+            href="#haku"
+            class="btn btn-primary btn-lg">
+            Aloita haku
+          </a>
+
+        </div>
+
+
+        <div class="col-lg-5 mt-4 mt-lg-0">
+
+          <div class="card shadow-sm">
+
+            <div class="card-body">
+
+              <h3 class="h5">
+                Mitä voit tehdä?
+              </h3>
+
+              <ul class="mb-0">
+                <li>Hakea maita nimellä</li>
+                <li>Tarkastella maiden tietoja</li>
+                <li>Suodattaa maita maanosan mukaan</li>
+                <li>Tallentaa suosikkimaita</li>
+              </ul>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- Maahaku -->
+    <section
+      id="haku"
+      class="search-section py-5">
+
+      <div class="container">
+
+        <div class="text-center mb-4">
+
+          <h2>
+            Maahaku
+          </h2>
+
+          <p>
+            Hae maata kirjoittamalla maan nimi hakukenttään.
+          </p>
+
+        </div>
+
+
+        <div class="row justify-content-center">
+
+          <div class="col-lg-8">
+
+            <form id="hakuForm">
+
+              <label
+                for="maaHaku"
+                class="form-label">
+                Maan nimi
+              </label>
+
+              <div class="input-group input-group-lg">
+
+                <input
+                  type="text"
+                  class="form-control"
+                  id="maaHaku"
+                  placeholder="Esimerkiksi Finland">
+
+                <button
+                  class="btn btn-primary"
+                  type="submit">
+                  Hae
+                </button>
+
+              </div>
+
+            </form>
+
+          </div>
+
+        </div>
+
+
+        <!-- Hakutulokset tulevat myöhemmin tähän -->
+        <div
+          id="hakutulokset"
+          class="row g-4 mt-4">
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- Suosikit -->
+    <section
+      id="suosikit"
+      class="container py-5">
+
+      <div class="text-center mb-4">
+
+        <h2>
+          Suosikkimaat
+        </h2>
+
+        <p>
+          Tänne tulevat myöhemmin tallentamasi suosikkimaat.
+        </p>
+
+      </div>
+
+
+      <!-- Suosikkimaat tulevat myöhemmin tähän -->
+      <div
+        id="suosikkiLista"
+        class="row g-4">
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- Alatunniste -->
+  <footer class="bg-dark text-white text-center py-4">
+
+    <div class="container">
+
+      <p class="mb-0">
+        Country Explorer – Bootstrap & JSON -lopputehtävä
+      </p>
+
+    </div>
+
+  </footer>
+
+
+  <!-- Bootstrap JavaScript -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+  </script>
+
+
+  <!-- Oma JavaScript -->
+  <script src="script.js"></script>
+
+</body>
+
+</html>
