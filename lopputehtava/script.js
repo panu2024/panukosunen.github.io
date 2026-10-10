@@ -7,6 +7,7 @@
 /* Sivun elementit */
 const hakuForm = document.getElementById("hakuForm");
 const maaHaku = document.getElementById("maaHaku");
+const maanosaSuodatin = document.getElementById("maanosaSuodatin");
 const hakutulokset = document.getElementById("hakutulokset");
 const suosikkiLista = document.getElementById("suosikkiLista");
 
@@ -21,7 +22,7 @@ naytaSuosikit();
 
 
 /* -----------------------------------
-   Maan hakeminen
+   Maan hakeminen nimellä
 ----------------------------------- */
 
 hakuForm.addEventListener("submit", function(event) {
@@ -29,10 +30,10 @@ hakuForm.addEventListener("submit", function(event) {
   // Estetään lomakkeen normaali lähetys
   event.preventDefault();
 
-  // Otetaan käyttäjän kirjoittama hakusana
+  // Luetaan käyttäjän kirjoittama hakusana
   const hakusana = maaHaku.value.trim();
 
-  // Tarkistetaan, ettei hakukenttä ole tyhjä
+  // Tarkistetaan tyhjä hakukenttä
   if (hakusana === "") {
 
     hakutulokset.innerHTML = `
@@ -46,19 +47,48 @@ hakuForm.addEventListener("submit", function(event) {
     return;
   }
 
-  // Käynnistetään haku
+  // Tyhjennetään maanosavalinta
+  maanosaSuodatin.value = "";
+
+  // Käynnistetään maan haku
   haeMaa(hakusana);
 
 });
 
 
 /* -----------------------------------
-   JSON-datan hakeminen API-palvelusta
+   UUSI: Maanosasuodatus
+----------------------------------- */
+
+maanosaSuodatin.addEventListener("change", function() {
+
+  // Luetaan valittu maanosa
+  const maanosa = maanosaSuodatin.value;
+
+  // Tyhjennetään maan hakukenttä
+  maaHaku.value = "";
+
+  // Jos käyttäjä valitsee oletusvaihtoehdon
+  if (maanosa === "") {
+
+    hakutulokset.innerHTML = "";
+    return;
+
+  }
+
+  // Haetaan valitun maanosan maat
+  haeMaanosanMaat(maanosa);
+
+});
+
+
+/* -----------------------------------
+   JSON-datan hakeminen maan nimellä
 ----------------------------------- */
 
 async function haeMaa(hakusana) {
 
-  // Näytetään käyttäjälle, että tietoja haetaan
+  // Näytetään latausilmoitus
   hakutulokset.innerHTML = `
     <div class="col-12 text-center" role="status">
       <p>Haetaan maita...</p>
@@ -79,18 +109,17 @@ async function haeMaa(hakusana) {
       throw new Error("Maata ei löytynyt");
     }
 
-    // Muutetaan JSON-vastaus JavaScript-objekteiksi
+    // Muutetaan JSON JavaScript-taulukoksi
     const maat = await response.json();
 
     // Näytetään hakutulokset
     naytaMaat(maat);
 
-    // Tyhjennetään hakukenttä onnistuneen haun jälkeen
+    // Tyhjennetään hakukenttä
     maaHaku.value = "";
 
   } catch (error) {
 
-    // Näytetään virheilmoitus
     hakutulokset.innerHTML = `
       <div class="col-12">
         <div class="message-box" role="alert">
@@ -108,6 +137,63 @@ async function haeMaa(hakusana) {
 
 
 /* -----------------------------------
+   UUSI: JSON-haku maanosan mukaan
+----------------------------------- */
+
+async function haeMaanosanMaat(maanosa) {
+
+  // Näytetään latausilmoitus
+  hakutulokset.innerHTML = `
+    <div class="col-12 text-center" role="status">
+      <p>Haetaan maanosan maita...</p>
+    </div>
+  `;
+
+  try {
+
+    // Muodostetaan maanosan API-osoite
+    const url =
+      `https://countries.dev/region/${encodeURIComponent(maanosa)}`;
+
+    // Haetaan maat ulkoisesta JSON-rajapinnasta
+    const response = await fetch(url);
+
+    // Tarkistetaan, onnistuiko haku
+    if (!response.ok) {
+      throw new Error("Maanosan tietoja ei löytynyt");
+    }
+
+    // Muutetaan JSON JavaScript-taulukoksi
+    const maat = await response.json();
+
+    // Järjestetään maat aakkosjärjestykseen
+    maat.sort(function(a, b) {
+      return a.name.localeCompare(b.name, "fi");
+    });
+
+    // Näytetään maat Bootstrap-kortteina
+    naytaMaat(maat);
+
+  } catch (error) {
+
+    // Virheilmoitus epäonnistuneessa haussa
+    hakutulokset.innerHTML = `
+      <div class="col-12">
+        <div class="message-box" role="alert">
+          Maanosan tietoja ei pystytä hakemaan.
+          Yritä myöhemmin uudelleen.
+        </div>
+      </div>
+    `;
+
+    console.error("Maanosahaku epäonnistui:", error);
+
+  }
+
+}
+
+
+/* -----------------------------------
    Hakutulosten näyttäminen
 ----------------------------------- */
 
@@ -116,13 +202,25 @@ function naytaMaat(maat) {
   // Tyhjennetään vanhat hakutulokset
   hakutulokset.innerHTML = "";
 
-  // Käydään kaikki löytyneet maat läpi
+  // Tarkistetaan, löytyikö maita
+  if (!Array.isArray(maat) || maat.length === 0) {
+
+    hakutulokset.innerHTML = `
+      <div class="col-12">
+        <div class="message-box" role="status">
+          Maita ei löytynyt.
+        </div>
+      </div>
+    `;
+
+    return;
+  }
+
+  // Luodaan jokaiselle maalle oma kortti
   maat.forEach(function(maa) {
 
-    // Luodaan maalle Bootstrap-kortti
     const kortti = luoMaaKortti(maa, false);
 
-    // Lisätään kortti sivulle
     hakutulokset.appendChild(kortti);
 
   });
@@ -136,7 +234,7 @@ function naytaMaat(maat) {
 
 function luoMaaKortti(maa, onSuosikki) {
 
-  // Bootstrap-gridin sarake
+  // Luodaan responsiivinen Bootstrap-sarake
   const sarake = document.createElement("div");
 
   sarake.className =
@@ -145,10 +243,9 @@ function luoMaaKortti(maa, onSuosikki) {
   // Luodaan Bootstrap-kortti
   const kortti = document.createElement("div");
 
-  kortti.className =
-    "card country-card";
+  kortti.className = "card country-card";
 
-  // Valitaan maan lippukuva
+  // Valitaan maan lippu
   let lippu = "";
 
   if (maa.flags && maa.flags.svg) {
@@ -157,7 +254,7 @@ function luoMaaKortti(maa, onSuosikki) {
     lippu = maa.flags.png;
   }
 
-  // Lisätään lippu turvallisesti DOM-elementtinä
+  // Luodaan lippukuva
   if (lippu) {
 
     const kuva = document.createElement("img");
@@ -174,8 +271,7 @@ function luoMaaKortti(maa, onSuosikki) {
   // Luodaan kortin sisältöalue
   const cardBody = document.createElement("div");
 
-  cardBody.className =
-    "card-body d-flex flex-column";
+  cardBody.className = "card-body d-flex flex-column";
 
   // Maan nimi
   const otsikko = document.createElement("h3");
@@ -191,19 +287,21 @@ function luoMaaKortti(maa, onSuosikki) {
       ? maa.population.toLocaleString("fi-FI")
       : "Ei tietoa";
 
-  // Kortissa näkyvät perustiedot
+  // Kortissa näytettävät perustiedot
   const perustiedot = [
     ["Pääkaupunki", maa.capital || "Ei tietoa"],
     ["Maanosa", maa.region || "Ei tietoa"],
     ["Väkiluku", vakiluku]
   ];
 
+  // Luodaan jokainen tietorivi
   perustiedot.forEach(function(tieto) {
 
     const rivi = document.createElement("p");
     const nimi = document.createElement("strong");
 
     nimi.textContent = tieto[0] + ": ";
+
     rivi.appendChild(nimi);
 
     rivi.appendChild(
@@ -216,11 +314,10 @@ function luoMaaKortti(maa, onSuosikki) {
 
 
   /* -----------------------------------
-     Uusi Bootstrap Modal -painike
+     Bootstrap Modal -painike
   ----------------------------------- */
 
-  const lisatietoPainike =
-    document.createElement("button");
+  const lisatietoPainike = document.createElement("button");
 
   lisatietoPainike.type = "button";
 
@@ -230,12 +327,11 @@ function luoMaaKortti(maa, onSuosikki) {
   lisatietoPainike.textContent =
     "Näytä lisätiedot";
 
-  // Avataan valitun maan lisätiedot
+  // Avataan valitun maan tiedot
   lisatietoPainike.addEventListener("click", function() {
     naytaLisatiedot(maa);
   });
 
-  // Lisätään painike korttiin
   cardBody.appendChild(lisatietoPainike);
 
 
@@ -243,47 +339,43 @@ function luoMaaKortti(maa, onSuosikki) {
      Suosikkipainike
   ----------------------------------- */
 
-  const painike =
-    document.createElement("button");
+  const painike = document.createElement("button");
 
   painike.type = "button";
 
-  // Jos kortti näkyy suosikeissa
   if (onSuosikki) {
 
+    // Suosikeissa olevan maan poistaminen
     painike.className =
       "btn btn-outline-danger favorite-button mt-auto";
 
-    painike.textContent =
-      "Poista suosikeista";
+    painike.textContent = "Poista suosikeista";
 
-    // Poistetaan maa suosikeista
     painike.addEventListener("click", function() {
       poistaSuosikki(maa.alpha3Code);
     });
 
   } else {
 
+    // Maan lisääminen suosikkeihin
     painike.className =
       "btn btn-outline-primary favorite-button mt-auto";
 
-    painike.textContent =
-      "Lisää suosikiksi";
+    painike.textContent = "Lisää suosikiksi";
 
-    // Lisätään maa suosikkeihin
     painike.addEventListener("click", function() {
       lisaaSuosikki(maa);
     });
 
   }
 
-  // Lisätään suosikkipainike korttiin
+  // Lisätään painike korttiin
   cardBody.appendChild(painike);
 
-  // Lisätään sisältö korttiin
+  // Lisätään kortin sisältö
   kortti.appendChild(cardBody);
 
-  // Lisätään kortti Bootstrap-sarakkeeseen
+  // Lisätään kortti sarakkeeseen
   sarake.appendChild(kortti);
 
   return sarake;
@@ -292,13 +384,12 @@ function luoMaaKortti(maa, onSuosikki) {
 
 
 /* -----------------------------------
-   UUSI TOIMINTO:
-   Maan lisätietojen näyttäminen Modalissa
+   Maan lisätiedot Bootstrap Modalissa
 ----------------------------------- */
 
 function naytaLisatiedot(maa) {
 
-  // Muodostetaan valuutoista luettava teksti
+  // Valuuttojen käsittely
   let valuutat = "Ei tietoa";
 
   if (Array.isArray(maa.currencies) &&
@@ -307,6 +398,7 @@ function naytaLisatiedot(maa) {
     valuutat = maa.currencies.map(function(valuutta) {
 
       const nimi = valuutta.name || "Tuntematon valuutta";
+
       const koodi = valuutta.code
         ? ` (${valuutta.code})`
         : "";
@@ -317,8 +409,7 @@ function naytaLisatiedot(maa) {
 
   }
 
-
-  // Muodostetaan kielistä luettava teksti
+  // Kielten käsittely
   let kielet = "Ei tietoa";
 
   if (Array.isArray(maa.languages) &&
@@ -330,27 +421,23 @@ function naytaLisatiedot(maa) {
 
   }
 
-
-  // Muotoillaan pinta-ala
+  // Pinta-alan muotoilu
   const pintaAla =
     typeof maa.area === "number"
       ? maa.area.toLocaleString("fi-FI") + " km²"
       : "Ei tietoa";
 
-
-  // Muotoillaan väkiluku
+  // Väkiluvun muotoilu
   const vakiluku =
     typeof maa.population === "number"
       ? maa.population.toLocaleString("fi-FI")
       : "Ei tietoa";
 
-
-  // Modal-ikkunan otsikoksi tulee maan nimi
+  // Modal-ikkunan otsikko
   modalOtsikko.textContent =
     maa.name + " – lisätiedot";
 
-
-  // Muodostetaan tarkempien tietojen lista
+  // Näytettävät lisätiedot
   const tiedot = [
     ["Pääkaupunki", maa.capital || "Ei tietoa"],
     ["Maanosa", maa.region || "Ei tietoa"],
@@ -362,18 +449,17 @@ function naytaLisatiedot(maa) {
     ["Maakoodi", maa.alpha3Code || "Ei tietoa"]
   ];
 
-
-  // Tyhjennetään Modal-ikkunan vanha sisältö
+  // Tyhjennetään aiemmat tiedot
   modalSisalto.innerHTML = "";
 
-  // Luodaan Bootstrap-gridillä muotoiltu tietolista
+  // Luodaan Bootstrap-gridin mukainen tietolista
   const lista = document.createElement("dl");
 
   lista.className = "row";
 
   tiedot.forEach(function(tieto) {
 
-    // Tiedon otsikko
+    // Tiedon nimi
     const otsikko = document.createElement("dt");
 
     otsikko.className = "col-sm-4 mb-2";
@@ -385,21 +471,18 @@ function naytaLisatiedot(maa) {
     arvo.className = "col-sm-8 mb-2";
     arvo.textContent = tieto[1];
 
-    // Lisätään otsikko ja arvo listaan
     lista.appendChild(otsikko);
     lista.appendChild(arvo);
 
   });
 
-  // Lisätään valmis lista Modal-ikkunaan
+  // Lisätään lista Modal-ikkunaan
   modalSisalto.appendChild(lista);
 
-
-  // Haetaan Bootstrap Modal -olio
+  // Avataan Bootstrap Modal
   const modal =
     bootstrap.Modal.getOrCreateInstance(modalElement);
 
-  // Avataan Modal-ikkuna
   modal.show();
 
 }
@@ -419,18 +502,18 @@ function lisaaSuosikki(maa) {
     return suosikki.alpha3Code === maa.alpha3Code;
   });
 
-  // Lisätään vain, jos maa ei ole jo suosikeissa
+  // Lisätään maa vain kerran
   if (!loytyyJo) {
 
     suosikit.push(maa);
 
-    // Tallennetaan suosikit localStorageen
+    // Tallennetaan localStorageen JSON-muodossa
     localStorage.setItem(
       "suosikkimaat",
       JSON.stringify(suosikit)
     );
 
-    // Päivitetään suosikkilista
+    // Päivitetään suosikit
     naytaSuosikit();
 
   }
@@ -444,7 +527,6 @@ function lisaaSuosikki(maa) {
 
 function poistaSuosikki(alpha3Code) {
 
-  // Haetaan nykyiset suosikit
   let suosikit = haeSuosikit();
 
   // Poistetaan valittu maa
@@ -452,34 +534,33 @@ function poistaSuosikki(alpha3Code) {
     return maa.alpha3Code !== alpha3Code;
   });
 
-  // Tallennetaan uusi lista selaimeen
+  // Tallennetaan päivitetty lista
   localStorage.setItem(
     "suosikkimaat",
     JSON.stringify(suosikit)
   );
 
-  // Päivitetään suosikkien näkymä
+  // Päivitetään suosikkinäkymä
   naytaSuosikit();
 
 }
 
 
 /* -----------------------------------
-   Suosikkien hakeminen localStoragesta
+   Suosikkien lukeminen localStoragesta
 ----------------------------------- */
 
 function haeSuosikit() {
 
-  // Haetaan tallennettu JSON-merkkijono
+  // Haetaan tallennettu JSON
   const tallennetut =
     localStorage.getItem("suosikkimaat");
 
-  // Jos suosikkeja ei ole, palautetaan tyhjä taulukko
   if (tallennetut === null) {
     return [];
   }
 
-  // Muutetaan JSON takaisin JavaScript-taulukoksi
+  // Muutetaan JSON takaisin taulukoksi
   try {
 
     const suosikit = JSON.parse(tallennetut);
@@ -502,13 +583,13 @@ function haeSuosikit() {
 
 function naytaSuosikit() {
 
-  // Haetaan suosikit
+  // Haetaan tallennetut suosikit
   const suosikit = haeSuosikit();
 
-  // Tyhjennetään vanha lista
+  // Tyhjennetään aiempi lista
   suosikkiLista.innerHTML = "";
 
-  // Jos suosikkeja ei vielä ole
+  // Jos suosikkeja ei ole
   if (suosikit.length === 0) {
 
     suosikkiLista.innerHTML = `
@@ -522,11 +603,10 @@ function naytaSuosikit() {
     return;
   }
 
-  // Luodaan jokaiselle suosikille kortti
+  // Luodaan suosikeille maakortit
   suosikit.forEach(function(maa) {
 
-    const kortti =
-      luoMaaKortti(maa, true);
+    const kortti = luoMaaKortti(maa, true);
 
     suosikkiLista.appendChild(kortti);
 
