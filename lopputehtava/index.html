@@ -169,7 +169,7 @@
           </h2>
 
           <p>
-            Hae maata kirjoittamalla maan nimi hakukenttään.
+            Hae maata nimellä tai selaa maita maanosan mukaan.
           </p>
 
         </div>
@@ -178,6 +178,7 @@
 
           <div class="col-lg-8">
 
+            <!-- Maan hakeminen nimellä -->
             <form id="hakuForm">
 
               <label
@@ -204,14 +205,58 @@
 
             </form>
 
+
+            <!-- UUSI: Maanosasuodatus -->
+            <div class="mt-4">
+
+              <label
+                for="maanosaSuodatin"
+                class="form-label">
+                Selaa maanosan mukaan
+              </label>
+
+              <select
+                id="maanosaSuodatin"
+                class="form-select form-select-lg">
+
+                <option value="" selected>
+                  Valitse maanosa
+                </option>
+
+                <option value="Europe">
+                  Eurooppa
+                </option>
+
+                <option value="Asia">
+                  Aasia
+                </option>
+
+                <option value="Africa">
+                  Afrikka
+                </option>
+
+                <option value="Americas">
+                  Amerikka
+                </option>
+
+                <option value="Oceania">
+                  Oseania
+                </option>
+
+              </select>
+
+            </div>
+
           </div>
 
         </div>
 
+
         <!-- JSON-hakutulokset näytetään tässä -->
         <div
           id="hakutulokset"
-          class="row g-4 mt-4">
+          class="row g-4 mt-4"
+          aria-live="polite">
         </div>
 
       </div>
@@ -277,8 +322,7 @@
 
         </div>
 
-
-        <!-- Maan tarkemmat tiedot lisätään JavaScriptillä -->
+        <!-- Lisätiedot lisätään JavaScriptillä -->
         <div
           class="modal-body"
           id="modalSisalto">
@@ -286,7 +330,6 @@
           <p>Valitse maa nähdäksesi lisätiedot.</p>
 
         </div>
-
 
         <!-- Modal-ikkunan alapainike -->
         <div class="modal-footer">
@@ -327,7 +370,7 @@
   </script>
 
   <!-- Oma JavaScript -->
-  <script src="script.js?v=2"></script>
+  <script src="script.js?v=3"></script>
 
 </body>
 
